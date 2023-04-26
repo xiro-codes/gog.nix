@@ -1,5 +1,5 @@
 {mkNativeGame, ...} @ inputs:
-mkNativeGame{
+mkNativeGame {
   pname = "inscryption";
   path = "Games/inscryption.sh";
   sha256 = "";

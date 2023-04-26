@@ -1,5 +1,5 @@
 {mkNativeGame, ...} @ inputs:
-mkNativeGame{
+mkNativeGame {
   # Broken tries write save files to nix store
   pname = "dead-cells";
   path = "Games/dead_cells.sh";

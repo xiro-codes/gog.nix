@@ -1,4 +1,4 @@
-{ mkNativeGame, ... } @ inputs:
+{mkNativeGame, ...} @ inputs:
 mkNativeGame {
   # missing lib libcurl-gnutls.so
   pname = "dont-starve";
