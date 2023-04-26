@@ -7,8 +7,8 @@
       inherit system;
       config.allowUnfree = true;
     };
-    helpers = import ./helpers { inherit pkgs; };
+    libs = import ./libs { inherit pkgs; };
   in {
-    packages.${system} = import ./pkgs { inherit pkgs; };
+    packages.${system} = import ./pkgs { inherit pkgs libs; };
   };
 }
