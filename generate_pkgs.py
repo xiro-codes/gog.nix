@@ -1,126 +1,149 @@
+#!/usr/bin/env python3
 import argparse
 import subprocess
 import sys
+import json
+import re
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 
+CACHE_FILE = ".hash_cache.json"
+
+def load_cache():
+    cache_path = Path(CACHE_FILE)
+    if cache_path.exists():
+        try:
+            with open(cache_path, "r") as f:
+                return json.load(f)
+        except json.JSONDecodeError:
+            return {}
+    return {}
+
+def save_cache(cache):
+    with open(CACHE_FILE, "w") as f:
+        json.dump(cache, f, indent=2)
+
 def get_nix_hash(file_path):
     try:
-        # Get raw sha256 in base32
         result = subprocess.run(
             ["nix-hash", "--flat", "--base32", "--type", "sha256", str(file_path)],
             capture_output=True, text=True, check=True
         )
-        # Convert base32 to SRI format (sha256-...)
         full_hash = subprocess.run(
             ["nix", "hash", "to-sri", "--type", "sha256", result.stdout.strip()],
             capture_output=True, text=True, check=True
         )
         return full_hash.stdout.strip()
-    except FileNotFoundError:
-        print("Error: 'nix-hash' or 'nix' command not found. Is Nix installed?", file=sys.stderr)
-        return "sha256-0000000000000000000000000000000000000000000="
-    except subprocess.CalledProcessError as e:
+    except Exception as e:
         print(f"Error hashing {file_path}: {e}", file=sys.stderr)
-        return "sha256-0000000000000000000000000000000000000000000="
+        return None
 
-def process_game(game_folder, output_base):
-    """Processes a single folder: scans for .sh, hashes them, and returns nix data."""
-    # Strict filter: Only .sh files
-    sh_files = list(game_folder.glob("*.sh"))
+def extract_metadata(nix_file_path):
+    if not nix_file_path.exists():
+        return None, "0.1.0"
+    content = nix_file_path.read_text()
+    h_match = re.search(r'sha256\s*=\s*"([^"]+)"', content)
+    v_match = re.search(r'version\s*=\s*"([^"]+)"', content)
+    return (h_match.group(1) if h_match else None,
+            v_match.group(1) if v_match else "0.1.0")
 
+def increment_version(version_str):
+    parts = version_str.split('.')
+    if len(parts) == 3 and parts[-1].isdigit():
+        parts[-1] = str(int(parts[-1]) + 1)
+        return ".".join(parts)
+    return version_str + ".1"
+
+def process_game(game_folder, output_base, cache):
+    sh_files = sorted(list(game_folder.glob("*.sh")), key=lambda x: x.stat().st_mtime, reverse=True)
     if not sh_files:
         return None
 
-    # Format pname for Nix (lowercase, hyphens instead of spaces/underscores)
+    newest_sh = sh_files[0]
     pname = game_folder.name.lower().replace("_", "-").replace(" ", "-")
-    files_data = []
+    target_nix = Path(output_base) / pname / "default.nix"
 
-    for sh_file in sh_files:
-        print(f"  [HASHING] {pname} -> {sh_file.name}")
-        sri_hash = get_nix_hash(sh_file)
+    file_key = str(newest_sh.absolute())
+    mtime = newest_sh.stat().st_mtime
+    new_hashes = {}
 
-        files_data.append({
-            "file": f"{game_folder.name}/{sh_file.name}",
-            "sha256": sri_hash
-        })
+    if file_key in cache and cache[file_key]["mtime"] == mtime:
+        new_sri_hash = cache[file_key]["hash"]
+    else:
+        print(f"  [HASHING] {pname} -> {newest_sh.name}")
+        new_sri_hash = get_nix_hash(newest_sh)
+        if not new_sri_hash: return None
+        new_hashes[file_key] = {"mtime": mtime, "hash": new_sri_hash}
 
-    # Construct the Nix path list
-    paths_nix = "\n".join([
-        f'    {{ file = "{f["file"]}"; sha256 = "{f["sha256"]}"; }}'
-        for f in files_data
-    ])
+    existing_hash, current_version = extract_metadata(target_nix)
 
-    # mkNativeGame template
+    if existing_hash == new_sri_hash:
+        return (pname, None, new_hashes)
+
+    new_version = increment_version(current_version) if target_nix.exists() else "0.1.0"
+    broken_meta = "\n  meta.broken = true;" if target_nix.exists() else ""
+
     nix_content = f"""{{ mkNativeGame, ... }} @ inputs:
 mkNativeGame
 {{
   pname = "{pname}";
-  version = "0.1.0";
+  version = "{new_version}";
   paths = [
-{paths_nix}
-  ];
+    {{ file = "{game_folder.name}/{newest_sh.name}"; sha256 = "{new_sri_hash}"; }}
+  ];{broken_meta}
 }}
   inputs"""
 
-    return (pname, nix_content)
+    return (pname, nix_content, new_hashes)
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Generate Nix package definitions for Linux games from a directory of installers."
-    )
-    parser.add_argument(
-        "input_dir",
-        type=str,
-        help="The directory to scan for game subfolders."
-    )
-    parser.add_argument(
-        "-o", "--output",
-        type=str,
-        default="pkgs/games",
-        help="Base directory to write Nix packages (default: pkgs/games)"
-    )
-    parser.add_argument(
-        "-t", "--threads",
-        type=int,
-        default=None,
-        help="Number of threads for parallel hashing (default: CPU count)"
-    )
-
+    parser = argparse.ArgumentParser(description="Generate Nix packages with versioning, caching, and safety checks.")
+    parser.add_argument("input_dir", type=str, help="Directory to scan")
+    parser.add_argument("-o", "--output", type=str, default="pkgs/games", help="Output directory")
+    parser.add_argument("-t", "--threads", type=int, default=None, help="Number of threads")
     args = parser.parse_args()
+
     input_path = Path(args.input_dir)
     output_base = Path(args.output)
-
-    if not input_path.exists() or not input_path.is_dir():
-        print(f"Error: Input directory '{args.input_dir}' does not exist.", file=sys.stderr)
-        sys.exit(1)
-
-    print(f"Scanning: {input_path.absolute()}")
-    game_folders = [f for f in input_path.iterdir() if f.is_dir()]
+    cache = load_cache()
 
     results = []
+    all_new_hashes = {}
 
-    # Process folders in parallel
     with ThreadPoolExecutor(max_workers=args.threads) as executor:
-        futures = [executor.submit(process_game, folder, output_base) for folder in game_folders]
+        folders = [f for f in input_path.iterdir() if f.is_dir()]
+        futures = [executor.submit(process_game, f, output_base, cache) for f in folders]
         for future in futures:
             res = future.result()
             if res:
-                results.append(res)
+                pname, content, h = res
+                results.append((pname, content))
+                all_new_hashes.update(h)
 
-    # Final write to disk
-    if not results:
-        print("No folders with .sh files found.")
-        return
+    if all_new_hashes:
+        cache.update(all_new_hashes)
+        save_cache(cache)
 
-    print(f"\nWriting {len(results)} package(s) to {output_base.absolute()}...")
     for pname, content in results:
-        target_dir = output_base / pname
-        target_dir.mkdir(parents=True, exist_ok=True)
+        if content:
+            dest = output_base / pname
+            dest.mkdir(parents=True, exist_ok=True)
+            with open(dest / "default.nix", "w") as f:
+                f.write(content)
 
-        with open(target_dir / "default.nix", "w") as f:
-            f.write(content)
-        print(f"  [WRITTEN] {pname}")
+    # Final Report: List all broken packages
+    broken_packages = []
+    for pkg_dir in output_base.iterdir():
+        nix_file = pkg_dir / "default.nix"
+        if nix_file.exists() and "meta.broken = true;" in nix_file.read_text():
+            broken_packages.append(pkg_dir.name)
+
+    if broken_packages:
+        print("\n--- BROKEN PACKAGES (Require Manual Review) ---")
+        for pkg in sorted(broken_packages):
+            print(f" - {pkg}")
+    else:
+        print("\nNo packages are currently marked as broken.")
 
 if __name__ == "__main__":
     main()
