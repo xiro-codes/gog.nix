@@ -29,7 +29,7 @@ stdenvNoCC.mkDerivation {
   '';
   buildPahse = ''
     mkdir -p $out/share/${pname}
-    cp -r * $out/share/${pname}
+    cp -r source/* $out/share/${pname}
   '';
   installPhase = ''
     makeWrapper ${steam-run}/bin/steam-run $out/bin/${pname} --add-flags $out/share/${pname}/data/noarch/start.sh
