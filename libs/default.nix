@@ -1,5 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }: {
   callPackageWith = import ./callPackageWith.nix;
-  fetchNextcloud = import ./fetchNextcloud.nix {inherit pkgs;};
+  fetchFile = import ./fetchFile.nix { inherit pkgs; };
   mkNativeGame = import ./mkNativeGame.nix;
 }
