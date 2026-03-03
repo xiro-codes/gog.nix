@@ -20,16 +20,15 @@ stdenvNoCC.mkDerivation {
   nativeBuildInputs = [ zip unzip makeWrapper ];
   buildInputs = [ steam-run ];
 
-  sourceRoot = "source";
+  #sourceRoot = "source";
 
   unpackPhase = ''
+    mkdir -p $out/share/${pname}
     zip -F $src --out fixed.zip
-    unzip -d source fixed.zip
-    substituteInPlace source/data/noarch/start.sh --replace-warn chmod "#chmod"
+    unzip -d $out/share/${pname} fixed.zip
+    substituteInPlace $out/share/${pname}/data/noarch/start.sh --replace-warn chmod "#chmod"
   '';
   buildPahse = ''
-    mkdir -p $out/share/${pname}
-    cp -r source/* $out/share/${pname}
   '';
   installPhase = ''
     makeWrapper ${steam-run}/bin/steam-run $out/bin/${pname} --add-flags $out/share/${pname}/data/noarch/start.sh
