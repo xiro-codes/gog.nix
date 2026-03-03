@@ -1,7 +1,6 @@
 { pname
 , version
-, path
-, sha256
+, paths ? [ ]
 , fixup ? ""
 , meta ? { }
 ,
@@ -27,16 +26,26 @@ let
 in
 stdenvNoCC.mkDerivation {
   name = "${pname}";
-  src = fetchFile { inherit pname version path sha256; };
+  srcs = map
+    (p: fetchFile {
+      inherit pname version;
+      path = p.file;
+      sha256 = p.sha256;
+    })
+    paths;
   nativeBuildInputs = [ zip unzip makeWrapper ];
   buildInputs = [ steam-run ];
 
 
   unpackPhase = ''
     mkdir -p $out/share/${pname}
-    zip -F $src --out fixed.zip
-    unzip -d $out/share/${pname} fixed.zip
-    substituteInPlace $out/share/${pname}/data/noarch/start.sh --replace-warn chmod "#chmod"
+    for source in $srcs; do
+      unzip -o -qq "$source" -d $out/share/${pname}/ || true
+    done
+
+    if [ -f $out/share/${pname}/data/noarch/start.sh ]; then
+      substituteInPlace $out/share/${pname}/data/noarch/start.sh --replace-warn chmod "#chmod"
+    fi
   '';
 
   installPhase = ''
