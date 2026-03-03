@@ -16,9 +16,11 @@
       libs = import ./libs { inherit pkgs; };
     in
     {
-      packages.${system} = import ./pkgs { inherit pkgs libs; };
+      packages.${system} = import ./pkgs {
+        inherit pkgs libs;
+      };
       devShells.${system}.default = pkgs.mkShell {
-        packages = [ ];
+        packages = with pkgs; [ python3 just ];
       };
     };
 }

@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import argparse
 import subprocess
 import sys
@@ -6,7 +5,6 @@ from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor
 
 def get_nix_hash(file_path):
-    """Generates a Nix-compatible sha256 SRI hash using nix-hash."""
     try:
         # Get raw sha256 in base32
         result = subprocess.run(

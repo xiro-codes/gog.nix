@@ -1,7 +1,4 @@
-{ pkgs, ... }:
-let
-  serverUrl = "https://files.onix.home";
-in
+{ pkgs, serverUrl ? "https://files.onix.home", ... }:
 { pname, version, path, sha256 }: pkgs.fetchurl {
   name = baseNameOf path;
   url = "${serverUrl}/${path}";
