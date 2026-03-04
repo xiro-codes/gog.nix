@@ -6,6 +6,7 @@ mkNativeGame
   paths = [
     { file = "dead_cells/dead_cells_1_26_0_75679.sh"; sha256 = "sha256-YDM7my8fo8gj/qp25OHyiJmSUDDuTZRIcER1VPLJ/6Q="; }
   ];
+  # due to save file location now being in the store
   meta.broken = true;
 }
   inputs
