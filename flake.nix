@@ -20,6 +20,7 @@
         inherit pkgs libs;
       };
       nixosModules = {
+        gog = ./modules/gog/default.nix;
         gog-sync = ./modules/gog-sync/default.nix;
       };
       devShells.${system}.default = pkgs.mkShell {
