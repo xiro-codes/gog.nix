@@ -22,6 +22,7 @@
       nixosModules = {
         gog = ./modules/gog/default.nix;
         gog-sync = ./modules/gog-sync/default.nix;
+        gog-server = ./modules/gog-server/default.nix;
       };
       devShells.${system}.default = pkgs.mkShell {
         packages = with pkgs; [ python3 just ];
