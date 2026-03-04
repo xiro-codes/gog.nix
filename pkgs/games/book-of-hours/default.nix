@@ -6,7 +6,8 @@ mkNativeGame
   paths = [
     { file = "book_of_hours/book_of_hours_2025_8_e_6_86506.sh"; sha256 = "sha256-kp9R1vcZmlgweZ12YdNQNjoyB+nl5uWp/BAqJ5NpfFg="; }
   ];
-  meta.broken = true;
+  # testing this again bad dl 
+  meta.broken = false;
 }
   inputs
 
