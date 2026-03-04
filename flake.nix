@@ -19,6 +19,9 @@
       packages.${system} = import ./pkgs {
         inherit pkgs libs;
       };
+      nixosModules = {
+        gog-sync = ./modules/gog-sync/default.nix;
+      };
       devShells.${system}.default = pkgs.mkShell {
         packages = with pkgs; [ python3 just ];
       };
