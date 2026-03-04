@@ -6,5 +6,8 @@ mkNativeGame
   paths = [
     { file = "treasure_of_nadia/treasure_of_nadia_1_0117_64117.sh"; sha256 = "sha256-MDz++cg82L+S+de0ID2Lr5v56wAEf64ulO7qu4xUWys="; }
   ];
+  # ./nw: error while loading shared libraries: libffmpeg.so: cannot open shared object file: No such file or directory
+  meta.broken = true;
 }
   inputs
+
