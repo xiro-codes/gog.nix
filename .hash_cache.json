@@ -12,7 +12,7 @@
     "hash": "sha256-pEC8YRo0I+C1ZOFHau6NnPFHjYU8IMHvYHSOIwv/EQQ="
   },
   "/media/Media/games/moonlighter/moonlighter_1_14_38_48229.sh": {
-    "mtime": 1736829774.0,
+    "mtime": 1772531916.0,
     "hash": "sha256-DKQB6u4GsJ3wEbAUsIIyGfMzrav3UD40FnBO4/9ItyY="
   },
   "/media/Media/games/orwell/orwell_1_4_9208_80802.sh": {
@@ -48,8 +48,8 @@
     "hash": "sha256-euQbNq7G0SwrdlS+ATTvrhUgsFYWr6b0zwHbQbAEM8g="
   },
   "/media/Media/games/soma/soma_1_61_50361.sh": {
-    "mtime": 1736848473.0,
-    "hash": "sha256-kRjd+UlmeI7C5RwrNNwCnpkj8Cgx+zedYsWcZtZnmYI="
+    "mtime": 1772593822.0272944,
+    "hash": "sha256-6YZ825J4psjjWKJrupmKcIGkpVtV6VOqxSvTWy2zvhQ="
   },
   "/media/Media/games/terraria/terraria_v1_4_5_5_88657.sh": {
     "mtime": 1736855941.0,
@@ -60,7 +60,7 @@
     "hash": "sha256-GhD+RLZweCqERqzy1S5yOh1G9JFR/yBs9VTjum4aVeI="
   },
   "/media/Media/games/pillars_of_eternity/pillars_of_eternity_3_8_0_88149_85633.sh": {
-    "mtime": 1653573011.0,
+    "mtime": 1759510379.0,
     "hash": "sha256-wEHKw5cBtTNGjm60bYSforFf2rqmSbQT+Sx4yN3uFX4="
   },
   "/media/Media/games/spacechem/spacechem_1016_40617.sh": {
@@ -68,7 +68,7 @@
     "hash": "sha256-C5YLeZDFoT3XluUuT1BqEehn9HaE/DI1zgAUWBl9QJE="
   },
   "/media/Media/games/huniepop/gog_huniepop_2.0.0.3.sh": {
-    "mtime": 1653565404.0,
+    "mtime": 1736829765.0,
     "hash": "sha256-fnr0qEbiqePviQrL+RRFpWy66+UgU3I4h3D/3t6QyZ4="
   },
   "/media/Media/games/absolute_drift/absolute_drift_5f6049d_65600.sh": {
@@ -100,7 +100,7 @@
     "hash": "sha256-tBqEr8cm6T8XMJvP68aTUpoI+tVGz3WnPq5yKbvKWe4="
   },
   "/media/Media/games/lust_theory_season_1/lust_theory_season_1_1_0_61906.sh": {
-    "mtime": 1653567828.0,
+    "mtime": 1736836793.0,
     "hash": "sha256-makyzwhQqY71OXA8KAGFOxUChozjwiWQBidyxsSN+5M="
   },
   "/media/Media/games/oxenfree/oxenfree_2_7_1_27542.sh": {
@@ -136,7 +136,7 @@
     "hash": "sha256-QOmgiGGdUCqYJIkKxadj4QUxWwQv+U9M3VyOFd3wV9w="
   },
   "/media/Media/games/summers_gone_season_1/summer_s_gone_season_1_1_3_25_l_84044.sh": {
-    "mtime": 1736860738.0,
+    "mtime": 1754163636.0,
     "hash": "sha256-6nGOWMGQ1fLDYlBTBN1mjdjnUU+GarenH2heN6NSUpQ="
   },
   "/media/Media/games/being_a_dik/being_a_dik_season_1_0_4_8_14_58137.sh": {
@@ -152,7 +152,7 @@
     "hash": "sha256-sJbXKoR86hCczTUiSTC7NzQVnMYGxWld1mlRHQMzm8s="
   },
   "/media/Media/games/sunless_sea/sunless_sea_2_2_11_3212_64426.sh": {
-    "mtime": 1736860738.0,
+    "mtime": 1754163636.0,
     "hash": "sha256-eoeSRX0DnPjhvSRTZwWxOSKM7IepMLpc2iwPUGABcNc="
   },
   "/media/Media/games/psychonauts/gog_psychonauts_2.0.0.4.sh": {
@@ -250,5 +250,21 @@
   "/media/Media/games/fetish_locator_week_one/fetish_locator_week_one_1_0_60_dlc_68792.sh": {
     "mtime": 1736808923.0,
     "hash": "sha256-HnPE7ED4ICxp3Nu8n5q4xu5EkleIbB3cnQ7tMuLVt+w="
+  },
+  "/media/Media/games/world_of_goo/world_of_goo_1_6_538_87464.sh": {
+    "mtime": 1766476083.0,
+    "hash": "sha256-7FqIc66JLhlKowMJrjjpPt2wvf2TxBuLtQ3qCvBWrk8="
+  },
+  "/media/Media/games/megaquarium/megaquarium_v5_0_12g_89146.sh": {
+    "mtime": 1772531916.0,
+    "hash": "sha256-DWxym9Hipt4Yl4pVpZlZXnL/vgM7uDFnEujXnUqTKnM="
+  },
+  "/media/Media/games/human_resource_machine/gog_human_resource_machine_2.0.0.3.sh": {
+    "mtime": 1736829765.0,
+    "hash": "sha256-7TTdb79CQjhNq/H0aQpMGQHjoMEmcEX7nQpzZBt7IWk="
+  },
+  "/media/Media/games/luftrausers/gog_luftrausers_2.0.0.3.sh": {
+    "mtime": 1736837316.0,
+    "hash": "sha256-pk7IEnpWewqQQmcPdcJb3ESyBPhVl1pcugp9Wqr23xA="
   }
 }
