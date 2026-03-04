@@ -1,4 +1,5 @@
 { pname
+, bname ? pname
 , version
 , paths ? [ ]
 , fixup ? ""
@@ -26,6 +27,7 @@ let
 in
 stdenvNoCC.mkDerivation {
   name = "${pname}";
+  bname = bname;
   srcs = map
     (p: fetchFile {
       inherit pname version;
