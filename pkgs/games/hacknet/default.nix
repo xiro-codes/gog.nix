@@ -9,9 +9,8 @@ mkNativeGame
   fixup = ''
     # Fix missing libnss3.so
     wrapProgram $out/bin/hacknet \
-      --prefix LD_LIBRARY_PATH : ${inputs.nss}/lib
+      --prefix LD_LIBRARY_PATH : ${inputs.nss}/lib:${inputs.nspr}/lib:${inputs.gnome2.GConf}/lib:${inputs.xorg.libXScrnSaver}/lib
   '';
-  # ./Hacknet.bin.x86_64: error while loading shared libraries: libnspr4.so: cannot open shared object file: No such file or directory
   meta.broken = true;
 }
   inputs
