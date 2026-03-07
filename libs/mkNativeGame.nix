@@ -59,6 +59,7 @@ stdenvNoCC.mkDerivation {
     libxscrnsaver # for libXss.so.1
     libxkbcommon # for libxkbcommon.so.0
     libbsd # for libbsd.so.0
+    SDL2
     gtk2 # for libgtk-x11-2.0.so.0 and libgdk-x11-2.0.so.0
     pango # for libpango-1.0.so.0 and libpangocairo-1.0.so.0
     gdk-pixbuf # for libgdk_pixbuf-2.0.so.0
