@@ -6,5 +6,7 @@ mkNativeGame
   paths = [
     { file = "neurodeck_psychological_deckbuilder/neurodeck_psychological_deckbuilder_1_5_3_49984.sh"; sha256 = "sha256-4Nsr62HuluZ6f8bQw2uSy3n61Wkf7/dPBue1AhBgyOw="; }
   ];
+  extraBuildInputs = with inputs; [ gtk3 ];
 }
   inputs
+

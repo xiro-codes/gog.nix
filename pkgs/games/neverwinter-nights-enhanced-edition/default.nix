@@ -10,6 +10,10 @@ mkNativeGame
   # Working Directory For Your Resources Is: /home/tod/.local/share/Neverwinter Nights
   # Could not divine nwn base data directory. Have to give up.
   # Make sure you are starting the game with your working directory setto the appropriate platform directory (i.e. <GAMEDATA>/bin/linux-x86)
+  extraBuildInputs = with inputs; [
+    glfw
+  ];
+  needsWriteableDir = true;
   meta.broken = true;
 }
   inputs

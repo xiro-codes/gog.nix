@@ -9,9 +9,10 @@ rec
   ];
   fixup = ''
     # Fix missing libpng12.so.0
-    wrapProgram $out/bin/democracy\-3 \
+    wrapProgram $out/bin/democracy-3 \
       --prefix LD_LIBRARY_PATH : ${inputs.libpng12}/lib
   '';
+  meta.broken = true;
 }
   inputs
 
