@@ -3,4 +3,5 @@
   fetchFile = import ./fetchFile.nix { inherit pkgs serverUrl; };
   mkNativeGame = import ./mkNativeGame.nix;
   mkWindowsGame = import ./mkWindowGame.nix;
+  mkSimpleGame = import ./nativeBuilders/mkSimpleGame.nix;
 }
