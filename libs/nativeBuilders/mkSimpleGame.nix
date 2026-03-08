@@ -27,7 +27,8 @@ let
 in
 stdenvNoCC.mkDerivation {
   name = "${pname}";
-  inherit meta fixupPhase;
+
+  inherit meta fixupPhase pname;
   srcs = map
     (p: fetchFile {
       inherit pname version;
