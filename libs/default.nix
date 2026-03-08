@@ -4,4 +4,5 @@
   mkNativeGame = import ./mkNativeGame.nix;
   mkWindowsGame = import ./mkWindowGame.nix;
   mkSimpleGame = import ./nativeBuilders/mkSimpleGame.nix;
+  mk32bitGame = import ./nativeBuilders/mk32bitGame.nix;
 }
