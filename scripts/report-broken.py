@@ -21,7 +21,7 @@ def get_game_metadata(game_name):
         return {"broken": "EVAL_ERROR"}
 
 def main():
-    games_dir = "pkgs/games"
+    games_dir = "packages/linux-games"
     if not os.path.exists(games_dir):
         print(f"Error: {games_dir} directory not found.")
         return
