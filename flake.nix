@@ -16,7 +16,7 @@
       libs = import ./libs { inherit pkgs; };
     in
     {
-      packages.${system} = import ./pkgs {
+      packages.${system} = import ./packages {
         inherit pkgs libs;
       };
       nixosModules = {
