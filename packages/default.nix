@@ -8,4 +8,7 @@ let
     inherit (libs) mkSimpleGame mkNativeGame mkWindowsGame fetchFile;
   });
 in
-with builtins; mapAttrs (name: value: callPackage (./linux-games + ("/" + name)) { }) (readDir ./linux-games)
+with builtins;
+(mapAttrs (name: value: callPackage (./linux-games + ("/" + name)) { }) (readDir ./linux-games))
+  //
+(mapAttrs (name: value: callPackage (./windows-games + ("/" + name)) { }) (readDir ./windows-games))
