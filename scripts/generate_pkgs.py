@@ -99,7 +99,7 @@ mkNativeGame
 def main():
     parser = argparse.ArgumentParser(description="Generate Nix packages with versioning, caching, and safety checks.")
     parser.add_argument("input_dir", type=str, help="Directory to scan")
-    parser.add_argument("-o", "--output", type=str, default="pkgs/games", help="Output directory")
+    parser.add_argument("-o", "--output", type=str, default="packages/linux-games", help="Output directory")
     parser.add_argument("-t", "--threads", type=int, default=None, help="Number of threads")
     args = parser.parse_args()
 
