@@ -1,7 +1,7 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.programs.gog;
-  gogPkgs = import ../../pkgs {
+  gogPkgs = import ../../packages {
     inherit pkgs;
     libs = import ../../libs { inherit lib pkgs; serverUrl = cfg.serverUrl; };
   };
