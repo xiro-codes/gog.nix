@@ -65,7 +65,7 @@ In your `configuration.nix` (or Home Manager module if adapted), configure the `
       stardew-valley.enable = true;
       dead-cells.enable = true;
       hollow-knight.enable = true;
-      # ... see pkgs/games for available titles
+      # ... see packages/linux-games for available titles
     };
   };
 }
@@ -112,9 +112,9 @@ just gen-packages /path/to/my/downloaded/installers
 python3 generate_pkgs.py /path/to/my/downloaded/installers
 ```
 
-This will scan the directory, calculate hashes, and create/update entries in `pkgs/games`.
+This will scan the directory, calculate hashes, and create/update entries in `packages/`.
 
-3.  **Commit**: Commit the new files in `pkgs/games` to the repository.
+3.  **Commit**: Commit the new files in `packages/` to the repository.
 
 ## Supported Games
 
@@ -127,13 +127,13 @@ This repository currently contains definitions for **over 60 games**, including:
 -   Terraria
 -   And many more...
 
-Check the `pkgs/games` directory for the full list.
+Check the `packages/` directory for the full list.
 
 ## Project Structure
 
 -   `libs/`: Helper functions for building games (`mkNativeGame`, `mkWindowsGame`).
 -   `modules/`: NixOS modules (`gog`, `gog-sync`).
--   `pkgs/games/`: Generated Nix expressions for each game.
+-   `packages/`: Generated Nix expressions for each game.
 -   `generate_pkgs.py`: Script to scan installers and generate package definitions.
 
 ## License
