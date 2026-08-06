@@ -1,4 +1,9 @@
-{ pkgs, serverUrl ? "https://files.onix.home", ... }: {
+{
+  pkgs,
+  serverUrl ? "http://192.168.1.127:8000",
+  ...
+}:
+{
   callPackageWith = import ./callPackageWith.nix;
   fetchFile = import ./fetchFile.nix { inherit pkgs serverUrl; };
   mkNativeGame = import ./mkNativeGame.nix;
