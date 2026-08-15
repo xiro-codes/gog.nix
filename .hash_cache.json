@@ -274,5 +274,21 @@
   "/media/Media/games/shapez/shapez_1_0_57419.sh": {
     "mtime": 1737541070.0,
     "hash": "sha256-bovvban2KJqs78i9zGdNKSxklQU8D7bwK2TPy9VTK9o="
+  },
+  "/home/jde/games/installers/crypt-of-the-necrodancer/crypt_of_the_necrodancer_4_2_1_b5646_87306.sh": {
+    "mtime": 1786036296.112928,
+    "hash": "sha256-p0RCIYKk0bQnskdU2nzTfjGsRVT7oU8pPCmvv76z1I4="
+  },
+  "/home/jde/games/installers/ftl-advanced-edition/ftl_advanced_edition_1_6_12_2_35269.sh": {
+    "mtime": 1770130585.7048655,
+    "hash": "sha256-qsi9y79HuCP3eInie+d9Ut/eBBxJd+w3UXaipSBj4Mk="
+  },
+  "/home/jde/games/installers/stellaris/stellaris_4_2_4_87179.sh": {
+    "mtime": 1770131143.7286768,
+    "hash": "sha256-rO9853wTElwurZBdi1cdM6kVJxRhJVrqm2Y/YVZDXKg="
+  },
+  "/home/jde/games/installers/caves-of-qud/caves_of_qud_2_0_204_90_65721.sh": {
+    "mtime": 1715618103.501072,
+    "hash": "sha256-a6qY4PfKQGr8/canzz5VHRdCjkM6fxTlvdIYBtCCXjk="
   }
 }
